@@ -95,7 +95,7 @@
                                        :client_secret secret}))))
 
 
-(defn- get-access-token
+(defn get-access-token
   [{:keys [access-token-uri client-id client-secret basic-auth?]
     :or {basic-auth? false} :as profile} request]
   (let [res (http/post access-token-uri
@@ -103,6 +103,7 @@
                                 :form-params (request-params profile request)}
                          basic-auth? (add-header-credentials client-id client-secret)
                          (not basic-auth?) (add-form-credentials client-id client-secret)))]
+    (println "IM HERE GETTIN TOKENS!!!!")
     (println res)
     (format-access-token res)))
 
